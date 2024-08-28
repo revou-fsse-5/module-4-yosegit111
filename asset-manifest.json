@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/module-4-yosegit111/static/css/main.68caef4d.css",
-    "main.js": "/module-4-yosegit111/static/js/main.9b7fbab0.js",
-    "static/js/453.b1d7b4c0.chunk.js": "/module-4-yosegit111/static/js/453.b1d7b4c0.chunk.js",
-    "index.html": "/module-4-yosegit111/index.html",
-    "main.68caef4d.css.map": "/module-4-yosegit111/static/css/main.68caef4d.css.map",
-    "main.9b7fbab0.js.map": "/module-4-yosegit111/static/js/main.9b7fbab0.js.map",
-    "453.b1d7b4c0.chunk.js.map": "/module-4-yosegit111/static/js/453.b1d7b4c0.chunk.js.map"
+    "main.css": "/module-4-yosegit111/registration-form/static/css/main.68caef4d.css",
+    "main.js": "/module-4-yosegit111/registration-form/static/js/main.a801865e.js",
+    "static/js/453.b1d7b4c0.chunk.js": "/module-4-yosegit111/registration-form/static/js/453.b1d7b4c0.chunk.js",
+    "index.html": "/module-4-yosegit111/registration-form/index.html",
+    "main.68caef4d.css.map": "/module-4-yosegit111/registration-form/static/css/main.68caef4d.css.map",
+    "main.a801865e.js.map": "/module-4-yosegit111/registration-form/static/js/main.a801865e.js.map",
+    "453.b1d7b4c0.chunk.js.map": "/module-4-yosegit111/registration-form/static/js/453.b1d7b4c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.68caef4d.css",
-    "static/js/main.9b7fbab0.js"
+    "static/js/main.a801865e.js"
   ]
 }
