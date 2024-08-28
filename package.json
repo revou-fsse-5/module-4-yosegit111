@@ -1,5 +1,15 @@
 {
+  "name": "your-project-root",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "cd registration-form && npm start",
+    "build": "cd registration-form && npm run build",
+    "predeploy": "cd registration-form && npm run build",
+    "deploy": "gh-pages -d registration-form/build"
+  },
+  "homepage": "http://revou-fsse-5.github.io/module-4-yosegit111/registration-form",
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^3.2.3"
   }
 }
