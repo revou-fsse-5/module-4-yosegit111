@@ -1,0 +1,17 @@
+/* src/styles/global.css */
+.input {
+    @apply p-2 border border-gray-300 rounded-md w-full;
+  }
+  
+  .btn {
+    @apply px-4 py-2 bg-blue-500 text-white rounded-md;
+  }
+  
+  .btn-submit {
+    @apply bg-green-500;
+  }
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
