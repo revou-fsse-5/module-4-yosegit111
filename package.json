@@ -6,10 +6,7 @@
     "start": "cd registration-form && npm start",
     "build": "cd registration-form && npm run build",
     "predeploy": "cd registration-form && npm run build",
-    "deploy": "gh-pages -d registration-form/build"
+    "deploy": "cp -r registration-form/build/* . && git add . && git commit -m 'Deploy build' && git push origin main"
   },
-  "homepage": "http://revou-fsse-5.github.io/module-4-yosegit111/registration-form",
-  "devDependencies": {
-    "gh-pages": "^3.2.3"
-  }
+  "homepage": "http://revou-fsse-5.github.io/module-4-yosegit111"
 }
