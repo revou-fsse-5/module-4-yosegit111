@@ -8,5 +8,8 @@
     "predeploy": "cd registration-form && npm run build",
     "deploy": "cp -r registration-form/build/* . && git add . && git commit -m 'Deploy build' && git push origin main"
   },
-  "homepage": "http://revou-fsse-5.github.io/module-4-yosegit111"
+  "homepage": "http://revou-fsse-5.github.io/module-4-yosegit111",
+  "dependencies": {
+    "react-router-dom": "^6.26.1"
+  }
 }
