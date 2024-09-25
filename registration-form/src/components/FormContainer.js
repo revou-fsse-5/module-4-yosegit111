@@ -1,6 +1,8 @@
+// src/components/FormContainer.js
 import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const PersonalInfoSchema = Yup.object().shape({
@@ -23,12 +25,14 @@ const AccountInfoSchema = Yup.object().shape({
 
 const FormContainer = () => {
   const [step, setStep] = useState(1);
+  const navigate = useNavigate();
 
   const handleNextStep = () => setStep(step + 1);
   const handlePrevStep = () => setStep(step - 1);
 
   return (
     <div>
+      <h1 className="text-2xl font-bold">Register</h1>
       {step === 1 && (
         <Formik
           initialValues={{ fullName: '', email: '', dateOfBirth: '' }}
@@ -36,17 +40,26 @@ const FormContainer = () => {
           onSubmit={handleNextStep}
         >
           {({ errors, touched }) => (
-            <Form>
-              <Field name="fullName" placeholder="Full Name" />
-              {errors.fullName && touched.fullName ? <div>{errors.fullName}</div> : null}
-              
-              <Field name="email" type="email" placeholder="Email" />
-              {errors.email && touched.email ? <div>{errors.email}</div> : null}
+            <Form className="flex flex-col space-y-4">
+              <div>
+                <label className="label" htmlFor="fullName">Full Name</label>
+                <Field name="fullName" placeholder="Full Name" className="input" />
+                {errors.fullName && touched.fullName ? <div className="text-red-600">{errors.fullName}</div> : null}
+              </div>
 
-              <Field name="dateOfBirth" type="date" />
-              {errors.dateOfBirth && touched.dateOfBirth ? <div>{errors.dateOfBirth}</div> : null}
+              <div>
+                <label className="label" htmlFor="email">Email</label>
+                <Field name="email" type="email" placeholder="Email" className="input" />
+                {errors.email && touched.email ? <div className="text-red-600">{errors.email}</div> : null}
+              </div>
 
-              <button type="submit">Next</button>
+              <div>
+                <label className="label" htmlFor="dateOfBirth">Date of Birth</label>
+                <Field name="dateOfBirth" type="date" className="input" />
+                {errors.dateOfBirth && touched.dateOfBirth ? <div className="text-red-600">{errors.dateOfBirth}</div> : null}
+              </div>
+
+              <button type="submit" className="btn btn-primary">Next</button>
             </Form>
           )}
         </Formik>
@@ -59,21 +72,35 @@ const FormContainer = () => {
           onSubmit={handleNextStep}
         >
           {({ errors, touched }) => (
-            <Form>
-              <Field name="street" placeholder="Street" />
-              {errors.street && touched.street ? <div>{errors.street}</div> : null}
-              
-              <Field name="city" placeholder="City" />
-              {errors.city && touched.city ? <div>{errors.city}</div> : null}
+            <Form className="flex flex-col space-y-4">
+              <div>
+                <label className="label" htmlFor="street">Street</label>
+                <Field name="street" placeholder="Street" className="input" />
+                {errors.street && touched.street ? <div className="text-red-600">{errors.street}</div> : null}
+              </div>
 
-              <Field name="state" placeholder="State" />
-              {errors.state && touched.state ? <div>{errors.state}</div> : null}
+              <div>
+                <label className="label" htmlFor="city">City</label>
+                <Field name="city" placeholder="City" className="input" />
+                {errors.city && touched.city ? <div className="text-red-600">{errors.city}</div> : null}
+              </div>
 
-              <Field name="zipCode" placeholder="Zip Code" />
-              {errors.zipCode && touched.zipCode ? <div>{errors.zipCode}</div> : null}
+              <div>
+                <label className="label" htmlFor="state">State</label>
+                <Field name="state" placeholder="State" className="input" />
+                {errors.state && touched.state ? <div className="text-red-600">{errors.state}</div> : null}
+              </div>
 
-              <button type="button" onClick={handlePrevStep}>Back</button>
-              <button type="submit">Next</button>
+              <div>
+                <label className="label" htmlFor="zipCode">Zip Code</label>
+                <Field name="zipCode" placeholder="Zip Code" className="input" />
+                {errors.zipCode && touched.zipCode ? <div className="text-red-600">{errors.zipCode}</div> : null}
+              </div>
+
+              <div className="flex justify-between">
+                <button type="button" onClick={handlePrevStep} className="btn btn-secondary">Back</button>
+                <button type="submit" className="btn btn-primary">Next</button>
+              </div>
             </Form>
           )}
         </Formik>
@@ -85,20 +112,31 @@ const FormContainer = () => {
           validationSchema={AccountInfoSchema}
           onSubmit={(values) => {
             axios.post('http://localhost:3000/register', values)
-              .then(response => console.log('Registered:', response))
+              .then(() => {
+                alert('Registration is successful');
+                navigate('/login');
+              })
               .catch(error => console.error('Error registering:', error));
           }}
         >
           {({ errors, touched }) => (
-            <Form>
-              <Field name="username" placeholder="Username" />
-              {errors.username && touched.username ? <div>{errors.username}</div> : null}
+            <Form className="flex flex-col space-y-4">
+              <div>
+                <label className="label" htmlFor="username">Username</label>
+                <Field name="username" placeholder="Username" className="input" />
+                {errors.username && touched.username ? <div className="text-red-600">{errors.username}</div> : null}
+              </div>
 
-              <Field name="password" type="password" placeholder="Password" />
-              {errors.password && touched.password ? <div>{errors.password}</div> : null}
+              <div>
+                <label className="label" htmlFor="password">Password</label>
+                <Field name="password" type="password" placeholder="Password" className="input" />
+                {errors.password && touched.password ? <div className="text-red-600">{errors.password}</div> : null}
+              </div>
 
-              <button type="button" onClick={handlePrevStep}>Back</button>
-              <button type="submit">Submit</button>
+              <div className="flex justify-between">
+                <button type="button" onClick={handlePrevStep} className="btn btn-secondary">Back</button>
+                <button type="submit" className="btn btn-submit">Submit</button>
+              </div>
             </Form>
           )}
         </Formik>

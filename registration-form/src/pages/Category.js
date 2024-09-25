@@ -1,9 +1,13 @@
+// src/pages/Category.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('http://localhost:3000/categories')
@@ -12,51 +16,36 @@ const Category = () => {
   }, []);
 
   const addCategory = () => {
-    axios.post('http://localhost:3000/categories', { name: newCategory }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-      .then(response => setCategories([...categories, response.data]))
+    axios.post('http://localhost:3000/categories', { name: newCategory })
+      .then(response => {
+        setCategories([...categories, response.data]);
+        alert('Category added successfully');
+        navigate('/');
+      })
       .catch(error => console.error('Error adding category:', error));
   };
 
-  const updateCategory = (id, newName) => {
-    axios.put(`http://localhost:3000/categories/${id}`, { name: newName }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-      .then(() => setCategories(categories.map(cat => (cat.id === id ? { ...cat, name: newName } : cat))))
-      .catch(error => console.error('Error updating category:', error));
-  };
-
-  const deleteCategory = (id) => {
-    if (window.confirm('Are you sure you want to delete this category?')) {
-      axios.delete(`http://localhost:3000/categories/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-        .then(() => setCategories(categories.filter(cat => cat.id !== id)))
-        .catch(error => console.error('Error deleting category:', error));
-    }
-  };
-
   return (
-    <div>
-      <input value={newCategory} onChange={(e) => setNewCategory(e.target.value)} placeholder="New Category" />
-      <button onClick={addCategory}>Add Category</button>
+    
+    <div className="flex-col">
+      <div className="flex flex-col">
+        <label className="label" htmlFor="newCategory">New Category</label>
+        <input 
+          value={newCategory} 
+          onChange={(e) => setNewCategory(e.target.value)} 
+          placeholder="New Category" 
+          className="input"
+        />
+      </div>
+      <button onClick={addCategory} className="btn btn-primary">Add Category</button>
 
-      {categories.map(category => (
-        <div key={category.id}>
-          <input 
-            defaultValue={category.name} 
-            onBlur={(e) => updateCategory(category.id, e.target.value)} 
-          />
-          <button onClick={() => deleteCategory(category.id)}>Delete</button>
-        </div>
-      ))}
+      <div className="space-y-2 mt-4">
+        {categories.map(category => (
+          <div key={category.id} className="flex justify-between items-center border p-2 rounded">
+            <span>{category.name}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
